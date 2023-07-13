@@ -7,7 +7,11 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import me.project.borutoapp.data.repository.DataStoreOperationImpl
+import me.project.borutoapp.data.repository.Repository
 import me.project.borutoapp.domain.repository.DataStoreOperations
+import me.project.borutoapp.domain.usecase.GetUsecases
+import me.project.borutoapp.domain.usecase.ReadOnBoardingUseCase
+import me.project.borutoapp.domain.usecase.SaveOnBoardingUseCase
 import javax.inject.Singleton
 
 @Module
@@ -21,6 +25,17 @@ object RepositoryModule {
     ) : DataStoreOperations{
         return DataStoreOperationImpl(
             context = context
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideUseCases(
+        repository: Repository
+    ) : GetUsecases {
+        return GetUsecases(
+            readOnBoardingUseCase = ReadOnBoardingUseCase(repository),
+            saveOnBoardingUseCase = SaveOnBoardingUseCase(repository)
         )
     }
 
