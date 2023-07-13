@@ -1,4 +1,4 @@
-package me.project.borutoapp.data.pref
+package me.project.borutoapp.data.repository
 
 import android.content.Context
 import androidx.datastore.core.DataStore
