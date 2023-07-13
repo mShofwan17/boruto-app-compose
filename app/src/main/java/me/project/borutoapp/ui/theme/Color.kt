@@ -21,12 +21,29 @@ val ColorScheme.welcomeScreenBackgroundColor
     get() = if (isSystemInDarkTheme()) DarkGray
     else LightGray
 
-val ColorScheme.titleColor
+val titleColor
     @Composable
     get() = if (isSystemInDarkTheme()) LightGray
     else DarkGray
 
-val ColorScheme.descColor
+val descColor
     @Composable
     get() = if (isSystemInDarkTheme()) LightGray.copy(alpha = 0.5f)
     else DarkGray.copy(alpha = 0.5f)
+
+
+val activeIndicatiorColor
+    @Composable
+    get() = if (isSystemInDarkTheme()) Color.Gray
+    else Color.Blue
+
+val inActiveIndicatiorColor
+    @Composable
+    get() = if (isSystemInDarkTheme()) Color.White
+    else Color.LightGray
+
+
+val buttonBackgroundColor
+    @Composable
+    get() = if (isSystemInDarkTheme()) Color.Black
+    else Color.Blue

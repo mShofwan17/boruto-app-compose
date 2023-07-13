@@ -6,3 +6,5 @@ val DP_PADDING_40 = 40.dp
 val DP_PADDING_20 = 20.dp
 val DP_PADDING_16 = 16.dp
 val DP_PADDING_10 = 10.dp
+val DP_PADDING_12 = 12.dp
+val DP_PADDING_8 = 8.dp
