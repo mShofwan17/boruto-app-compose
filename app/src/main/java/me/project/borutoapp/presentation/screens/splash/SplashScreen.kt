@@ -65,6 +65,6 @@ private fun Preview() {
 
 @Composable
 @Preview(uiMode = UI_MODE_NIGHT_YES)
-private fun DarkReview() {
+private fun DarkPreview() {
     Splash(rotate = 0f)
 }
