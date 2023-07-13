@@ -35,7 +35,6 @@ import me.project.borutoapp.R
 import me.project.borutoapp.domain.models.OnBoardingPage
 import me.project.borutoapp.ui.theme.DP_PADDING_10
 import me.project.borutoapp.ui.theme.DP_PADDING_12
-import me.project.borutoapp.ui.theme.DP_PADDING_16
 import me.project.borutoapp.ui.theme.DP_PADDING_40
 import me.project.borutoapp.ui.theme.DP_PADDING_8
 import me.project.borutoapp.ui.theme.activeIndicatiorColor
@@ -44,6 +43,7 @@ import me.project.borutoapp.ui.theme.descColor
 import me.project.borutoapp.ui.theme.inActiveIndicatiorColor
 import me.project.borutoapp.ui.theme.titleColor
 import me.project.borutoapp.ui.theme.welcomeScreenBackgroundColor
+import me.project.borutoapp.utils.Constant.OnBoardingConst.ON_BOARDING_FINISH
 
 @Composable
 fun WelcomeScreen(navHostController: NavHostController) {
@@ -157,7 +157,7 @@ private fun FinishButton(
     ) {
         AnimatedVisibility(
             modifier = Modifier.fillMaxWidth(),
-            visible = pagerState.currentPage == 2
+            visible = pagerState.currentPage == ON_BOARDING_FINISH
         ) {
             Button(
                 onClick = onClick,
@@ -166,7 +166,7 @@ private fun FinishButton(
                     contentColor = Color.White
                 )
             ) {
-                Text(text = "Finish")
+                Text(text = stringResource(id = R.string.lbl_finish))
             }
         }
 
