@@ -1,15 +1,16 @@
 package me.project.borutoapp.presentation.screens.welcome
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
 import me.project.borutoapp.domain.models.OnBoardingPage
 import me.project.borutoapp.ui.theme.welcomeScreenBackgroundColor
 
@@ -24,18 +25,18 @@ fun WelcomeScreen(navHostController: NavHostController) {
     Welcome(pages = pages)
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun Welcome(pages: List<OnBoardingPage>) {
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState { pages.size }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.welcomeScreenBackgroundColor)
     ) {
-        HorizontalPager(
+       HorizontalPager(
             state = pagerState,
-            count = pages.size,
             verticalAlignment = Alignment.Top
         ) {page ->
             PagerScreen(onBoardingPage = pages[page])
