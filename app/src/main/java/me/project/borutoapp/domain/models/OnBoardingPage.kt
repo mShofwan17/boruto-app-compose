@@ -12,18 +12,18 @@ sealed class OnBoardingPage(
     object First : OnBoardingPage(
         image = R.drawable.greetings,
         title = "Selamat Datang",
-        desc = "Lorem Impusmasklndahdjkashdjkhajkdhkjhakdhjakhdjkashdjasdhkahd"
+        desc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec justo enim, condimentum at felis ut, pulvinar pulvinar sem. Duis ut consequat quam, sit amet scelerisque tellus. "
     )
 
     object Second : OnBoardingPage(
         image = R.drawable.explore,
         title = "Menjelajah",
-        desc = "Lorem Impusmasklndahdjkashdjkhajkdhkjhakdhjakhdjkashdjasdhkahd"
+        desc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec justo enim, condimentum at felis ut, pulvinar pulvinar sem. Duis ut consequat quam, sit amet scelerisque tellus. "
     )
 
     object Third : OnBoardingPage(
         image = R.drawable.power,
         title = "Kekuatan",
-        desc = "Lorem Impusmasklndahdjkashdjkhajkdhkjhakdhjakhdjkashdjasdhkahd"
+        desc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec justo enim, condimentum at felis ut, pulvinar pulvinar sem. Duis ut consequat quam, sit amet scelerisque tellus. "
     )
 }
