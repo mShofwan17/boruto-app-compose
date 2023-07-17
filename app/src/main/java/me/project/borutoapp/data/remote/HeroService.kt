@@ -4,7 +4,7 @@ import me.project.borutoapp.domain.models.ApiResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface HeroApi {
+interface HeroService {
     @GET("/boruto/heroes")
     suspend fun getAllHeroes(
         @Query("page") page: Int = 1
