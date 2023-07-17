@@ -47,3 +47,15 @@ val buttonBackgroundColor
     @Composable
     get() = if (isSystemInDarkTheme()) Color.Black
     else Color.Blue
+
+
+val topBarContentColor
+    @Composable
+    get() = if (isSystemInDarkTheme()) LightGray
+    else Color.White
+
+
+val topBarBackgroundColor
+    @Composable
+    get() = if (isSystemInDarkTheme()) Color.Black
+    else Color.Blue

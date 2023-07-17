@@ -3,5 +3,6 @@
     <string name="app_logo">APP Logo</string>
 
     <string name="cd_onboarding_image">OnBoardingImage</string>
+    <string name="cd_search_icon">search_icon</string>
     <string name="lbl_finish">Finish</string>
 </resources>
