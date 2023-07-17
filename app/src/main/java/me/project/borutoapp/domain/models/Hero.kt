@@ -2,8 +2,10 @@ package me.project.borutoapp.domain.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.serialization.Serializable
 import me.project.borutoapp.utils.Constant
 
+@Serializable
 @Entity(tableName = Constant.DatabaseConst.TB_HERO)
 data class Hero(
     @PrimaryKey(autoGenerate = false)
