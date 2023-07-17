@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,11 +22,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import me.project.borutoapp.R
+import me.project.borutoapp.navigation.Screen
 
 @Composable
-fun SplashScreen(navHostController: NavHostController) {
+fun SplashScreen(
+    navHostController: NavHostController,
+    viewModel: SplashViewModel = hiltViewModel()
+) {
+    val onBoardingCompleted by viewModel.onBoardingCompleted.collectAsState()
     val rotate = remember { Animatable(0f) }
     LaunchedEffect(key1 = true) {
         rotate.animateTo(
@@ -34,6 +42,13 @@ fun SplashScreen(navHostController: NavHostController) {
                 delayMillis = 200
             )
         )
+
+        navHostController.popBackStack()
+        val destination = if (onBoardingCompleted) Screen.Home.route
+        else Screen.Welcome.route
+
+        navHostController.navigate(destination)
+
     }
     Splash(rotate = rotate.value)
 }
