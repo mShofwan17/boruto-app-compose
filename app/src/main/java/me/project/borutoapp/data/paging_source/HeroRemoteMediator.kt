@@ -69,7 +69,6 @@ class HeroRemoteMediator @Inject constructor(
             MediatorResult.Error(e)
         }
     }
-
     private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, Hero>): HeroRemoteKey? {
         return state.anchorPosition?.let {
             state.closestItemToPosition(anchorPosition = it)?.id?.let { id ->

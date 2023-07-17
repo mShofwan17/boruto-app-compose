@@ -7,7 +7,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
+import me.project.borutoapp.data.local.HeroDatabase
 import me.project.borutoapp.data.remote.HeroService
+import me.project.borutoapp.data.repository.RemoteDataSourceImpl
+import me.project.borutoapp.domain.repository.RemoteDataSource
 import me.project.borutoapp.utils.Constant
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -52,5 +55,16 @@ object NetworkModule {
         retrofit: Retrofit
     ): HeroService {
         return retrofit.create(HeroService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(
+        service: HeroService,
+        database: HeroDatabase
+    ): RemoteDataSource {
+        return RemoteDataSourceImpl(
+            service, database
+        )
     }
 }
