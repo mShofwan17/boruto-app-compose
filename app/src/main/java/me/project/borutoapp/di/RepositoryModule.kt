@@ -9,6 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import me.project.borutoapp.data.repository.DataStoreOperationImpl
 import me.project.borutoapp.data.repository.Repository
 import me.project.borutoapp.domain.repository.DataStoreOperations
+import me.project.borutoapp.domain.usecase.GetAllHeroesUseCase
 import me.project.borutoapp.domain.usecase.GetUsecases
 import me.project.borutoapp.domain.usecase.ReadOnBoardingUseCase
 import me.project.borutoapp.domain.usecase.SaveOnBoardingUseCase
@@ -35,7 +36,8 @@ object RepositoryModule {
     ) : GetUsecases {
         return GetUsecases(
             readOnBoardingUseCase = ReadOnBoardingUseCase(repository),
-            saveOnBoardingUseCase = SaveOnBoardingUseCase(repository)
+            saveOnBoardingUseCase = SaveOnBoardingUseCase(repository),
+            getAllHeroesUseCase = GetAllHeroesUseCase(repository)
         )
     }
 
