@@ -15,6 +15,7 @@ val Pink40 = Color(0xFF7D5260)
 
 val LightGray = Color(0xFFFAFAFA)
 val DarkGray = Color(0xFF2a2a2a)
+val StarColor = Color(0xFFFFC94D)
 
 val ColorScheme.welcomeScreenBackgroundColor
     @Composable
