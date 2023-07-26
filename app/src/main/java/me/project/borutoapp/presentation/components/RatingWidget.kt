@@ -35,7 +35,7 @@ fun RatingWidget(
         starPath.getBounds()
     }
 
-    HalfFilledStar(
+    EmptyStar(
         starPath = starPath,
         starPathBounds = starPathBounds,
         scaleFactor
@@ -51,11 +51,11 @@ fun FilledStar(
 ) {
     Canvas(modifier = Modifier.size(DP_PADDING_24)) {
         val canvasSize = this.size
-        scale(scale = scaleFactor){
+        scale(scale = scaleFactor) {
             val pathWidth = starPathBounds.width
             val pathHeight = starPathBounds.height
-            val left = (canvasSize.width/2f) - (pathWidth/1.7f)
-            val top = (canvasSize.height/2f) - (pathHeight/1.7f)
+            val left = (canvasSize.width / 2f) - (pathWidth / 1.7f)
+            val top = (canvasSize.height / 2f) - (pathHeight / 1.7f)
 
             translate(
                 left = left,
@@ -79,11 +79,11 @@ fun HalfFilledStar(
 ) {
     Canvas(modifier = Modifier.size(DP_PADDING_24)) {
         val canvasSize = this.size
-        scale(scale = scaleFactor){
+        scale(scale = scaleFactor) {
             val pathWidth = starPathBounds.width
             val pathHeight = starPathBounds.height
-            val left = (canvasSize.width/2f) - (pathWidth/1.7f)
-            val top = (canvasSize.height/2f) - (pathHeight/1.7f)
+            val left = (canvasSize.width / 2f) - (pathWidth / 1.7f)
+            val top = (canvasSize.height / 2f) - (pathHeight / 1.7f)
 
             translate(
                 left = left,
@@ -93,7 +93,7 @@ fun HalfFilledStar(
                     path = starPath,
                     color = Color.LightGray.copy(alpha = 0.5f)
                 )
-                clipPath(path = starPath){
+                clipPath(path = starPath) {
                     drawRect(
                         color = StarColor,
                         size = Size(
@@ -102,6 +102,34 @@ fun HalfFilledStar(
                         )
                     )
                 }
+            }
+        }
+
+    }
+}
+
+@Composable
+fun EmptyStar(
+    starPath: Path,
+    starPathBounds: Rect,
+    scaleFactor: Float
+) {
+    Canvas(modifier = Modifier.size(DP_PADDING_24)) {
+        val canvasSize = this.size
+        scale(scale = scaleFactor) {
+            val pathWidth = starPathBounds.width
+            val pathHeight = starPathBounds.height
+            val left = (canvasSize.width / 2f) - (pathWidth / 1.7f)
+            val top = (canvasSize.height / 2f) - (pathHeight / 1.7f)
+
+            translate(
+                left = left,
+                top = top
+            ) {
+                drawPath(
+                    path = starPath,
+                    color = Color.LightGray.copy(alpha = 0.5f)
+                )
             }
         }
 
