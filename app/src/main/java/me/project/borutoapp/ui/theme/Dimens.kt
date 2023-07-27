@@ -9,3 +9,5 @@ val DP_PADDING_16 = 16.dp
 val DP_PADDING_10 = 10.dp
 val DP_PADDING_12 = 12.dp
 val DP_PADDING_8 = 8.dp
+
+val HERO_ITEM_HEIGHT = 400.dp
