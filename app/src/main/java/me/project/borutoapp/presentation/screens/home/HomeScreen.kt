@@ -10,6 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
+import me.project.borutoapp.presentation.components.RatingWidget
+import me.project.borutoapp.ui.theme.DP_PADDING_16
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,7 +32,7 @@ fun HomeScreen(
         Column(
             modifier = Modifier.padding(paddingValues)
         ) {
-
+            RatingWidget(modifier = Modifier.padding(DP_PADDING_16), rating = 4.4)
         }
     }
 }
