@@ -2,16 +2,22 @@ package me.project.borutoapp.presentation.common
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.MaterialTheme
@@ -31,14 +37,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.itemContentType
+import androidx.paging.compose.itemKey
 import coil.compose.rememberAsyncImagePainter
 import me.project.borutoapp.R
 import me.project.borutoapp.domain.models.Hero
 import me.project.borutoapp.navigation.Screen
 import me.project.borutoapp.presentation.components.RatingWidget
+import me.project.borutoapp.ui.theme.DP_PADDING_10
 import me.project.borutoapp.ui.theme.DP_PADDING_12
 import me.project.borutoapp.ui.theme.DP_PADDING_16
 import me.project.borutoapp.ui.theme.DP_PADDING_24
+import me.project.borutoapp.ui.theme.DP_PADDING_8
 import me.project.borutoapp.ui.theme.HERO_ITEM_HEIGHT
 import me.project.borutoapp.ui.theme.topBarContentColor
 import me.project.borutoapp.utils.Constant.NetworkConst.BASE_URL
@@ -49,7 +59,20 @@ fun ListContent(
     heroes: LazyPagingItems<Hero>,
     controller: NavHostController
 ) {
-
+    LazyColumn(
+        contentPadding = PaddingValues(all = DP_PADDING_10),
+        verticalArrangement = Arrangement.spacedBy(DP_PADDING_10)
+    ){
+        items(
+            count = heroes.itemCount,
+            key = heroes.itemKey { it.id },
+        ){index ->
+            val item = heroes[index]
+            item?.let {
+                HeroItem (item = it, controller = controller)
+            }
+        }
+    }
 }
 
 @Composable
@@ -58,7 +81,7 @@ fun HeroItem(
     controller: NavHostController
 ) {
     val painter = rememberAsyncImagePainter(
-        model = item.image/* "$BASE_URL${item.image}"*/,
+        model =  "$BASE_URL${item.image}",
         placeholder = painterResource(id = R.drawable.placeholder),
         error = painterResource(id = R.drawable.placeholder)
     )
@@ -69,9 +92,13 @@ fun HeroItem(
             .clickable {
                 controller.navigate(Screen.Detail.passId(id = item.id))
             },
-        contentAlignment = Alignment.BottomStart
+        contentAlignment = Alignment.BottomStart,
     ) {
-        Surface(shape = MaterialTheme.shapes.large) {
+        Surface(
+            shape = RoundedCornerShape(
+               size = DP_PADDING_24
+            )
+        ) {
             Image(
                 modifier = Modifier.fillMaxSize(),
                 painter = painter,
