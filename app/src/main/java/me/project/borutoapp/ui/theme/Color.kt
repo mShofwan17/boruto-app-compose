@@ -17,6 +17,10 @@ val LightGray = Color(0xFFFAFAFA)
 val DarkGray = Color(0xFF2a2a2a)
 val StarColor = Color(0xFFFFC94D)
 
+val ShimmerLightGray = Color(0xFFF1F1F1)
+val ShimmerMediumGray = Color(0xFFE3E3E3)
+val ShimmerDarkGray = Color(0xFF1D1D1D)
+
 val ColorScheme.welcomeScreenBackgroundColor
     @Composable
     get() = if (isSystemInDarkTheme()) DarkGray
