@@ -3,6 +3,7 @@ package me.project.borutoapp.presentation.common
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -28,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -36,6 +38,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
@@ -44,6 +47,7 @@ import me.project.borutoapp.R
 import me.project.borutoapp.domain.models.Hero
 import me.project.borutoapp.navigation.Screen
 import me.project.borutoapp.presentation.components.RatingWidget
+import me.project.borutoapp.presentation.components.ShimmerEffect
 import me.project.borutoapp.ui.theme.DP_PADDING_10
 import me.project.borutoapp.ui.theme.DP_PADDING_12
 import me.project.borutoapp.ui.theme.DP_PADDING_16
@@ -59,18 +63,49 @@ fun ListContent(
     heroes: LazyPagingItems<Hero>,
     controller: NavHostController
 ) {
-    LazyColumn(
-        contentPadding = PaddingValues(all = DP_PADDING_10),
-        verticalArrangement = Arrangement.spacedBy(DP_PADDING_10)
-    ){
-        items(
-            count = heroes.itemCount,
-            key = heroes.itemKey { it.id },
-        ){index ->
-            val item = heroes[index]
-            item?.let {
-                HeroItem (item = it, controller = controller)
+    val result = hanldePagingResult(heroes = heroes)
+    if (result){
+        LazyColumn(
+            contentPadding = PaddingValues(all = DP_PADDING_10),
+            verticalArrangement = Arrangement.spacedBy(DP_PADDING_10)
+        ) {
+            items(
+                count = heroes.itemCount,
+                key = heroes.itemKey { it.id },
+            ) { index ->
+                val item = heroes[index]
+                item?.let {
+                    HeroItem(item = it, controller = controller)
+                }
             }
+        }
+    }
+
+}
+
+@Composable
+fun hanldePagingResult(
+    heroes: LazyPagingItems<Hero>
+): Boolean {
+    heroes.apply {
+        val error = when {
+            loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
+            loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
+            loadState.append is LoadState.Error -> loadState.append as LoadState.Error
+            else -> null
+        }
+
+        return when {
+            loadState.refresh is LoadState.Loading -> {
+                ShimmerEffect()
+                false
+            }
+            error != null -> {
+                Log.i("hanldePagingResult_Error", "hanldePagingResult: ${error.error.localizedMessage}")
+                Toast.makeText(LocalContext.current, "${error.error.message}", Toast.LENGTH_SHORT).show()
+                false
+            }
+            else -> true
         }
     }
 }
@@ -81,7 +116,7 @@ fun HeroItem(
     controller: NavHostController
 ) {
     val painter = rememberAsyncImagePainter(
-        model =  "$BASE_URL${item.image}",
+        model = "$BASE_URL${item.image}",
         placeholder = painterResource(id = R.drawable.placeholder),
         error = painterResource(id = R.drawable.placeholder)
     )
@@ -96,7 +131,7 @@ fun HeroItem(
     ) {
         Surface(
             shape = RoundedCornerShape(
-               size = DP_PADDING_24
+                size = DP_PADDING_24
             )
         ) {
             Image(
