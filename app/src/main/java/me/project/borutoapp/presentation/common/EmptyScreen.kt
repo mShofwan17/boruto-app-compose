@@ -34,13 +34,14 @@ import me.project.borutoapp.ui.theme.DP_PADDING_10
 import me.project.borutoapp.ui.theme.DarkGray
 import me.project.borutoapp.ui.theme.LightGray
 import me.project.borutoapp.ui.theme.NETWORK_ERROR_ICON_HEIGHT
+import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 @Composable
 fun EmptyScreen(
     error: LoadState.Error
 ) {
-    val message by remember { mutableStateOf(parseErrorMsg(message = error.toString())) }
+    val message by remember { mutableStateOf(parseErrorMsg(error = error)) }
     val icon by remember { mutableIntStateOf(R.drawable.network_error) }
     var startAnimation by remember { mutableStateOf(false) }
     val alphaAnim by animateFloatAsState(
@@ -92,10 +93,10 @@ fun EmptyContent(
     }
 }
 
-private fun parseErrorMsg(message: String): String {
-    return when {
-        message.contains("SocketTimeoutException") -> "Server Unavailable"
-        message.contains("ConnectException") -> "Internet Unavailable"
+private fun parseErrorMsg(error: LoadState.Error): String {
+    return when (error.error) {
+        is SocketTimeoutException -> "Server Unavailable"
+        is ConnectException -> "Internet Unavailable"
         else -> "Unknown Error"
     }
 }

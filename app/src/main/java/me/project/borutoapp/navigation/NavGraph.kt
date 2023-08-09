@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import me.project.borutoapp.presentation.screens.home.HomeScreen
+import me.project.borutoapp.presentation.screens.search.SearchScreen
 import me.project.borutoapp.presentation.screens.splash.SplashScreen
 import me.project.borutoapp.presentation.screens.welcome.WelcomeScreen
 import me.project.borutoapp.utils.Constant
@@ -42,7 +43,7 @@ fun SetupNavGraph(navController: NavHostController) {
         }
 
         composable(route = Screen.Search.route) {
-
+            SearchScreen(navHostController = navController)
         }
     }
 }
