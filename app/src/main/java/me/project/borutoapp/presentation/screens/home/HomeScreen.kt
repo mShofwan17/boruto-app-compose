@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
+import me.project.borutoapp.navigation.Screen
 import me.project.borutoapp.presentation.common.ListContent
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -23,12 +24,14 @@ fun HomeScreen(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             HomeTopBar {
-
+                navHostController.navigate(Screen.Search.route)
             }
         },
     ) { paddingValues ->
         ListContent(
-            modifier = Modifier.padding(paddingValues),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
             heroes = allHeroes,
             controller = navHostController
         )

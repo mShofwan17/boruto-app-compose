@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import me.project.borutoapp.R
 import me.project.borutoapp.ui.theme.TOP_APP_BAR_HEIGHT
 import me.project.borutoapp.ui.theme.topBarBackgroundColor
+import me.project.borutoapp.ui.theme.topBarContentColor
 
 @Composable
 fun SearchTopBar(
@@ -68,19 +69,21 @@ fun SearchWidget(
             )
         },
         textStyle = TextStyle(
-            color = topBarBackgroundColor
+            color = Color.White
         ),
         singleLine = true,
         leadingIcon = {
             IconButton(modifier = Modifier.alpha(ContentAlpha.medium), onClick = {}) {
                 Icon(
                     imageVector = Icons.Default.Search,
-                    contentDescription = stringResource(id = R.string.cd_search_icon)
+                    contentDescription = stringResource(id = R.string.cd_search_icon),
+                    tint = topBarContentColor
                 )
             }
         },
         trailingIcon = {
-            IconButton(onClick = {
+            IconButton(
+                onClick = {
                 if (text.isNotEmpty()) {
                     onTextChanged("")
                 } else {
@@ -89,7 +92,8 @@ fun SearchWidget(
             }) {
                 Icon(
                     imageVector = Icons.Default.Close,
-                    contentDescription = stringResource(id = R.string.cd_search_icon)
+                    contentDescription = stringResource(id = R.string.cd_close_icon),
+                    tint = topBarContentColor
                 )
             }
         },
@@ -100,7 +104,9 @@ fun SearchWidget(
             onSearchClicked(text)
         },
         colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = Color.Transparent, cursorColor = topBarBackgroundColor
+            backgroundColor = Color.Transparent,
+            cursorColor = Color.White,
+            textColor = Color.White
         )
     )
 }
