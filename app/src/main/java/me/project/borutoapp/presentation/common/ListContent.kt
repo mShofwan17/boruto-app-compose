@@ -101,8 +101,8 @@ fun hanldePagingResult(
                 false
             }
             error != null -> {
-                Log.i("hanldePagingResult_Error", "hanldePagingResult: ${error.error.localizedMessage}")
-                Toast.makeText(LocalContext.current, "${error.error.message}", Toast.LENGTH_SHORT).show()
+                EmptyScreen(error = error)
+                Toast.makeText(LocalContext.current, "${error.error.cause?.message}", Toast.LENGTH_SHORT).show()
                 false
             }
             else -> true
