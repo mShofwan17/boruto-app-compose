@@ -6,5 +6,5 @@ import me.project.borutoapp.domain.models.Hero
 
 interface RemoteDataSource {
     fun getAllData(): Flow<PagingData<Hero>>
-    fun searchData(): Flow<PagingData<Hero>>
+    fun searchData(query: String): Flow<PagingData<Hero>>
 }

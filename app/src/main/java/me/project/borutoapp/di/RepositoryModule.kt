@@ -13,6 +13,7 @@ import me.project.borutoapp.domain.usecase.GetAllHeroesUseCase
 import me.project.borutoapp.domain.usecase.GetUsecases
 import me.project.borutoapp.domain.usecase.ReadOnBoardingUseCase
 import me.project.borutoapp.domain.usecase.SaveOnBoardingUseCase
+import me.project.borutoapp.domain.usecase.SearchHeroesUseCase
 import javax.inject.Singleton
 
 @Module
@@ -37,7 +38,8 @@ object RepositoryModule {
         return GetUsecases(
             readOnBoardingUseCase = ReadOnBoardingUseCase(repository),
             saveOnBoardingUseCase = SaveOnBoardingUseCase(repository),
-            getAllHeroesUseCase = GetAllHeroesUseCase(repository)
+            getAllHeroesUseCase = GetAllHeroesUseCase(repository),
+            searchHeroesUseCase = SearchHeroesUseCase((repository))
         )
     }
 

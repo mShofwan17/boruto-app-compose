@@ -23,4 +23,8 @@ class Repository @Inject constructor(
         return remoteDataSource.getAllData()
     }
 
+    fun searchHeroes(query: String): Flow<PagingData<Hero>>{
+        return remoteDataSource.searchData(query)
+    }
+
 }
