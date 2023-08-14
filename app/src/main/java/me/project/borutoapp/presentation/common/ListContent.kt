@@ -106,7 +106,7 @@ fun hanldePagingResult(
                 false
             }
             error != null -> {
-                EmptyScreen(error = error)
+                EmptyScreen(error = error, heroes)
                 Toast.makeText(LocalContext.current, "${error.error.cause?.message}", Toast.LENGTH_SHORT).show()
                 false
             }
