@@ -97,6 +97,10 @@ fun hanldePagingResult(
         }
 
         return when {
+            heroes.itemCount < 1 -> {
+                EmptyScreen()
+                false
+            }
             loadState.refresh is LoadState.Loading -> {
                 ShimmerEffect()
                 false

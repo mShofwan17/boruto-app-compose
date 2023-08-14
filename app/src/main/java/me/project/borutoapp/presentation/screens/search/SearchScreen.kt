@@ -1,15 +1,17 @@
 package me.project.borutoapp.presentation.screens.search
 
-import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
+import me.project.borutoapp.presentation.common.ListContent
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen(
@@ -23,8 +25,10 @@ fun SearchScreen(
         topBar = {
             SearchTopBar(
                 text = searchQuery,
-                onTextChanged = {
-                    viewModel.updateSearchQuery(it)
+                onTextChanged = { query ->
+                    viewModel.updateSearchQuery(query).also {
+                        if (query.length >= 3) viewModel.searchHeroes(query)
+                    }
                 },
                 onSearchClicked = {
                     viewModel.searchHeroes(it)
@@ -33,6 +37,12 @@ fun SearchScreen(
             )
         }
     ) {
-
+        ListContent(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues = it),
+            heroes = searchHeroesResult,
+            controller = navHostController
+        )
     }
 }
