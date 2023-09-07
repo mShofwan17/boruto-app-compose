@@ -1,4 +1,4 @@
-package me.project.borutoapp.presentation.details
+package me.project.borutoapp.presentation.screens.details
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController

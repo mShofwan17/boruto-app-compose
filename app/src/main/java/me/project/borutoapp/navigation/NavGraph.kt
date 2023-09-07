@@ -6,7 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import me.project.borutoapp.presentation.details.DetailScreen
+import me.project.borutoapp.presentation.screens.details.DetailScreen
 import me.project.borutoapp.presentation.screens.home.HomeScreen
 import me.project.borutoapp.presentation.screens.search.SearchScreen
 import me.project.borutoapp.presentation.screens.splash.SplashScreen
