@@ -4,6 +4,8 @@ import androidx.compose.ui.unit.dp
 
 val DP_PADDING_40 = 40.dp
 val DP_PADDING_24 = 24.dp
+val DP_PADDING_26 = 26.dp
+val DP_PADDING_32 = 32.dp
 val DP_PADDING_20 = 20.dp
 val DP_PADDING_16 = 16.dp
 val DP_PADDING_10 = 10.dp
