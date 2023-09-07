@@ -8,6 +8,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import me.project.borutoapp.data.local.HeroDatabase
+import me.project.borutoapp.data.repository.LocalDataSourceImpl
+import me.project.borutoapp.domain.repository.LocalDataSource
 import me.project.borutoapp.utils.Constant
 import javax.inject.Singleton
 
@@ -19,9 +21,17 @@ object DatabaseModule {
     @Singleton
     fun provideDatabase(
         @ApplicationContext context: Context
-    ) : HeroDatabase = Room.databaseBuilder(
+    ): HeroDatabase = Room.databaseBuilder(
         context = context,
         HeroDatabase::class.java,
         Constant.DatabaseConst.DB_HERO
     ).build()
+
+    @Provides
+    @Singleton
+    fun provideLocalDataSource(
+        database: HeroDatabase
+    ): LocalDataSource {
+        return LocalDataSourceImpl(database)
+    }
 }

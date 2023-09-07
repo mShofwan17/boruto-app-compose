@@ -10,6 +10,7 @@ import me.project.borutoapp.data.repository.DataStoreOperationImpl
 import me.project.borutoapp.data.repository.Repository
 import me.project.borutoapp.domain.repository.DataStoreOperations
 import me.project.borutoapp.domain.usecase.GetAllHeroesUseCase
+import me.project.borutoapp.domain.usecase.GetSelectedHeroUseCase
 import me.project.borutoapp.domain.usecase.GetUsecases
 import me.project.borutoapp.domain.usecase.ReadOnBoardingUseCase
 import me.project.borutoapp.domain.usecase.SaveOnBoardingUseCase
@@ -24,7 +25,7 @@ object RepositoryModule {
     @Singleton
     fun provideDataStoreOperations(
         @ApplicationContext context: Context
-    ) : DataStoreOperations{
+    ): DataStoreOperations {
         return DataStoreOperationImpl(
             context = context
         )
@@ -34,12 +35,13 @@ object RepositoryModule {
     @Singleton
     fun provideUseCases(
         repository: Repository
-    ) : GetUsecases {
+    ): GetUsecases {
         return GetUsecases(
             readOnBoardingUseCase = ReadOnBoardingUseCase(repository),
             saveOnBoardingUseCase = SaveOnBoardingUseCase(repository),
             getAllHeroesUseCase = GetAllHeroesUseCase(repository),
-            searchHeroesUseCase = SearchHeroesUseCase((repository))
+            searchHeroesUseCase = SearchHeroesUseCase(repository),
+            getSelectedHeroUseCase = GetSelectedHeroUseCase(repository)
         )
     }
 

@@ -4,5 +4,6 @@ data class GetUsecases(
     val readOnBoardingUseCase: ReadOnBoardingUseCase,
     val saveOnBoardingUseCase: SaveOnBoardingUseCase,
     val getAllHeroesUseCase: GetAllHeroesUseCase,
-    val searchHeroesUseCase: SearchHeroesUseCase
+    val searchHeroesUseCase: SearchHeroesUseCase,
+    val getSelectedHeroUseCase: GetSelectedHeroUseCase
 )
