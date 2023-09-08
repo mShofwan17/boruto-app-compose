@@ -20,4 +20,5 @@
     <string name="nature_types">Nature Types</string>
     <string name="image_detail">image_detail</string>
     <string name="cd_img_close">cd_img_close</string>
+    <string name="radius_bottom_sheet">radius_bottom-sheet</string>
 </resources>

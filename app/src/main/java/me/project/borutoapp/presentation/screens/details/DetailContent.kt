@@ -1,5 +1,6 @@
 package me.project.borutoapp.presentation.screens.details
 
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetScaffoldState
 import androidx.compose.material.BottomSheetValue
@@ -25,6 +27,7 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material.rememberBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -34,6 +37,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import me.project.borutoapp.R
@@ -44,6 +48,7 @@ import me.project.borutoapp.ui.theme.DP_PADDING_140
 import me.project.borutoapp.ui.theme.DP_PADDING_16
 import me.project.borutoapp.ui.theme.DP_PADDING_20
 import me.project.borutoapp.ui.theme.DP_PADDING_32
+import me.project.borutoapp.ui.theme.DP_PADDING_40
 import me.project.borutoapp.ui.theme.DP_PADDING_8
 import me.project.borutoapp.ui.theme.titleColor
 import me.project.borutoapp.utils.Constant
@@ -60,8 +65,18 @@ fun DetailContent(
         bottomSheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Expanded)
     )
     val currentSheetFraction = scaffoldState.currentSheetFraction
+    val radiusAnime by animateDpAsState(
+        targetValue =
+        if (currentSheetFraction == 1f) DP_PADDING_40
+        else 0.dp,
+        label = stringResource(R.string.radius_bottom_sheet)
+    )
 
     BottomSheetScaffold(
+        sheetShape = RoundedCornerShape(
+            topStart = radiusAnime,
+            topEnd = radiusAnime
+        ),
         scaffoldState = scaffoldState,
         sheetPeekHeight = DP_PADDING_140,
         sheetContent = {
