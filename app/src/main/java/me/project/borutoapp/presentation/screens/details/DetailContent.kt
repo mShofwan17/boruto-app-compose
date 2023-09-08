@@ -1,9 +1,13 @@
 package me.project.borutoapp.presentation.screens.details
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -12,8 +16,11 @@ import androidx.compose.material.BottomSheetValue
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material.rememberBottomSheetState
 import androidx.compose.runtime.Composable
@@ -21,11 +28,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import coil.compose.rememberAsyncImagePainter
 import me.project.borutoapp.R
 import me.project.borutoapp.domain.models.Hero
 import me.project.borutoapp.presentation.components.InfoBox
@@ -34,7 +43,9 @@ import me.project.borutoapp.ui.theme.DP_PADDING_140
 import me.project.borutoapp.ui.theme.DP_PADDING_16
 import me.project.borutoapp.ui.theme.DP_PADDING_20
 import me.project.borutoapp.ui.theme.DP_PADDING_32
+import me.project.borutoapp.ui.theme.DP_PADDING_8
 import me.project.borutoapp.ui.theme.titleColor
+import me.project.borutoapp.utils.Constant
 import me.project.borutoapp.utils.Constant.Common.ABOUT_TEXT_MAX_LINES
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -44,7 +55,7 @@ fun DetailContent(
     selectedHero: Hero?
 ) {
     val scaffoldState = rememberBottomSheetScaffoldState(
-        bottomSheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Expanded)
+        bottomSheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
     )
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
@@ -55,7 +66,11 @@ fun DetailContent(
             }
         }
     ) {
-
+        selectedHero?.image?.let { image ->
+            BackgroundContent(imageHero = image) {
+                navHostController.popBackStack()
+            }
+        }
     }
 }
 
@@ -173,6 +188,54 @@ fun BottomSheetContent(
                 textColor = contentColor
             )
 
+        }
+    }
+}
+
+@Composable
+fun BackgroundContent(
+    imageHero: String,
+    imageFraction: Float = 1f,
+    backgroundColor: Color = MaterialTheme.colors.surface,
+    onCloseClicked: () -> Unit
+) {
+    val imageUrl = "${Constant.NetworkConst.BASE_URL}$imageHero"
+    val painter = rememberAsyncImagePainter(
+        model = imageUrl,
+        placeholder = painterResource(id = R.drawable.placeholder),
+        error = painterResource(id = R.drawable.placeholder)
+    )
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(backgroundColor)
+    ) {
+        Image(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(fraction = imageFraction)
+                .align(Alignment.TopStart),
+            painter = painter,
+            contentDescription = stringResource(R.string.cd_hero_image),
+            contentScale = ContentScale.Crop
+        )
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
+        ) {
+            IconButton(
+                modifier = Modifier.padding(DP_PADDING_8),
+                onClick = { onCloseClicked() }
+            ) {
+                Icon(
+                    modifier = Modifier.size(DP_PADDING_32),
+                    imageVector = Icons.Default.Close,
+                    contentDescription = stringResource(R.string.cd_img_close),
+                    tint = Color.White
+                )
+            }
         }
     }
 }

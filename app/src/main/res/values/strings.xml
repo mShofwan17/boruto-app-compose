@@ -18,4 +18,6 @@
     <string name="family">Family</string>
     <string name="abilities">Abilities</string>
     <string name="nature_types">Nature Types</string>
+    <string name="image_detail">image_detail</string>
+    <string name="cd_img_close">cd_img_close</string>
 </resources>
