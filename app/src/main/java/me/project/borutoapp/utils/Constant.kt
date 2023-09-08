@@ -22,4 +22,8 @@ object Constant {
         const val PREFERENCE_NAME = "HERO_PREF"
         const val ON_BOARDING_COMPLETE = "ON_BOARDING_COMPLETE"
     }
+
+    object Common{
+        const val ABOUT_TEXT_MAX_LINES = 7
+    }
 }

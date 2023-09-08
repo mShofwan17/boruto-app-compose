@@ -1,12 +1,11 @@
 package me.project.borutoapp.presentation.screens.details
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import me.project.borutoapp.domain.models.Hero
@@ -20,8 +19,8 @@ class DetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _selectedHero: MutableState<Hero?> = mutableStateOf(null)
-    val selectedHero: State<Hero?> get() = _selectedHero
+    private val _selectedHero: MutableStateFlow<Hero?> = MutableStateFlow(null)
+    val selectedHero: StateFlow<Hero?> get() = _selectedHero
 
     init {
         val id: Int? = savedStateHandle[ID]
