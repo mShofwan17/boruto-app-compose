@@ -9,8 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import me.project.borutoapp.navigation.Screen
 import me.project.borutoapp.presentation.common.ListContent
+import me.project.borutoapp.ui.theme.statusBarColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -19,6 +21,10 @@ fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val allHeroes = homeViewModel.getAllHeroes.collectAsLazyPagingItems()
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(
+        color = statusBarColor
+    )
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),

@@ -21,6 +21,10 @@ val ShimmerLightGray = Color(0xFFF1F1F1)
 val ShimmerMediumGray = Color(0xFFE3E3E3)
 val ShimmerDarkGray = Color(0xFF1D1D1D)
 
+val statusBarColor
+@Composable
+get() = if (isSystemInDarkTheme()) Color.DarkGray
+else Color.Blue
 val ColorScheme.welcomeScreenBackgroundColor
     @Composable
     get() = if (isSystemInDarkTheme()) DarkGray

@@ -10,7 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import me.project.borutoapp.presentation.common.ListContent
+import me.project.borutoapp.ui.theme.statusBarColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -20,6 +22,10 @@ fun SearchScreen(
 ) {
     val searchQuery by viewModel.searchQuery
     val searchHeroesResult = viewModel.heroes.collectAsLazyPagingItems()
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(
+        color = statusBarColor
+    )
 
     Scaffold(
         topBar = {
