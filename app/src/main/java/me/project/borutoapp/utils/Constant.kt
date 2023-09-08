@@ -25,5 +25,6 @@ object Constant {
 
     object Common{
         const val ABOUT_TEXT_MAX_LINES = 7
+        const val MIN_BACKGROUND_FRACTION = 0.4f
     }
 }
