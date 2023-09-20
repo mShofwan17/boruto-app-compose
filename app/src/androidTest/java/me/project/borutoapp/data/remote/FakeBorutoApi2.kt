@@ -3,8 +3,9 @@ package me.project.borutoapp.data.remote
 import me.project.borutoapp.utils.PageUtil
 import me.project.borutoapp.domain.models.ApiResponse
 import me.project.borutoapp.domain.models.Hero
+import okio.IOException
 
-class FakeBorutoApi2: HeroService {
+class FakeBorutoApi2 : HeroService {
     private var _page1 = listOf(
         Hero(
             id = 1,
@@ -300,7 +301,20 @@ class FakeBorutoApi2: HeroService {
             5 to _page5
         )
     }
+
+    fun clearData() {
+        _page1 = emptyList()
+    }
+
+    private var exception = false
+    fun addExecption() {
+        exception = true
+    }
+
     override suspend fun getAllHeroes(page: Int): ApiResponse {
+        if (exception) throw IOException()
+
+        PageUtil.setItems(_page1)
         require(page in 1..5)
         return ApiResponse(
             success = true,
